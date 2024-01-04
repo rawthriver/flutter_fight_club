@@ -35,28 +35,36 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           const SizedBox(height: 40),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Column(
                   children: [
-                    const Center(child: Text('You')),
-                    for (var i = 1; i < 6; i++) Center(child: Text('$i')),
+                    Center(child: Text('You')),
+                    Center(child: Text('1')),
+                    Center(child: Text('1')),
+                    Center(child: Text('1')),
+                    Center(child: Text('1')),
+                    Center(child: Text('1')),
                   ],
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Expanded(
                 child: Column(
                   children: [
-                    const Center(child: Text('Enemy')),
-                    for (var i = 1; i < 6; i++) Center(child: Text('$i')),
+                    Center(child: Text('Enemy')),
+                    Center(child: Text('1')),
+                    Center(child: Text('1')),
+                    Center(child: Text('1')),
+                    Center(child: Text('1')),
+                    Center(child: Text('1')),
                   ],
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
             ],
           ),
           const Expanded(child: SizedBox()),
