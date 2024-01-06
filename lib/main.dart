@@ -75,7 +75,11 @@ class MyHomePageState extends State<MyHomePage> {
                         _fightingResult,
                         textAlign: TextAlign.center,
                         softWrap: true,
-                        style: const TextStyle(height: 2, fontSize: 10),
+                        style: const TextStyle(
+                          height: 2,
+                          fontSize: 10,
+                          color: FightClubColors.darkGreyText,
+                        ),
                       ),
                     ],
                   ),
