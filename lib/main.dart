@@ -235,7 +235,12 @@ class ControlsWidget extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                Text('Defend'.toUpperCase()),
+                Text(
+                  'Defend'.toUpperCase(),
+                  style: const TextStyle(
+                    color: FightClubColors.darkGreyText,
+                  ),
+                ),
                 const SizedBox(height: 13),
                 BodyPartButton(
                   bodyPart: BodyPart.head,
@@ -261,7 +266,12 @@ class ControlsWidget extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                Text('Attack'.toUpperCase()),
+                Text(
+                  'Attack'.toUpperCase(),
+                  style: const TextStyle(
+                    color: FightClubColors.darkGreyText,
+                  ),
+                ),
                 const SizedBox(height: 13),
                 BodyPartButton(
                   bodyPart: BodyPart.head,
@@ -335,7 +345,15 @@ class FightersInfo extends StatelessWidget {
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(top: 16, bottom: 12),
-                    child: Center(child: Text('You')),
+                    child: Center(
+                      child: Text(
+                        'You',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: FightClubColors.darkGreyText,
+                        ),
+                      ),
+                    ),
                   ),
                   Image.asset(
                     FightClubImages.youAvatar,
@@ -355,7 +373,15 @@ class FightersInfo extends StatelessWidget {
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(top: 16, bottom: 12),
-                    child: Center(child: Text('Enemy')),
+                    child: Center(
+                      child: Text(
+                        'Enemy',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: FightClubColors.darkGreyText,
+                        ),
+                      ),
+                    ),
                   ),
                   Image.asset(
                     FightClubImages.enemyAvatar,
@@ -452,7 +478,17 @@ class BodyPartButton extends StatelessWidget {
           color: selected
               ? FightClubColors.blueButton
               : FightClubColors.greyButton,
-          child: Center(child: Text(bodyPart.name.toUpperCase())),
+          child: Center(
+            child: Text(
+              bodyPart.name.toUpperCase(),
+              style: TextStyle(
+                fontSize: 13,
+                color: selected
+                    ? FightClubColors.whiteText
+                    : FightClubColors.darkGreyText,
+              ),
+            ),
+          ),
         ),
       ),
     );
