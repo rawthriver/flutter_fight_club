@@ -49,8 +49,6 @@ class MyHomePageState extends State<MyHomePage> {
   bool _gameOver = true;
   String _fightingResult = 'Ready to go';
 
-//EdgeInsets.only(left: 16, top: 30, right: 16, bottom: 30),
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,30 +61,28 @@ class MyHomePageState extends State<MyHomePage> {
               myLivesCount: myLives,
               enemyLivesCount: enemyLives,
             ),
+            const SizedBox(height: 30),
             Expanded(
-              child: SizedBox(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 16, top: 30, right: 16, bottom: 30),
-                  child: ColoredBox(
-                    color: FightClubColors.backgroundBlock,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Text(
-                            _fightingResult,
-                            textAlign: TextAlign.center,
-                            softWrap: true,
-                            style: const TextStyle(height: 2, fontSize: 10),
-                          ),
-                        ),
-                      ],
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ColoredBox(
+                  color: FightClubColors.backgroundBlock,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        _fightingResult,
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                        style: const TextStyle(height: 2, fontSize: 10),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
+            const SizedBox(height: 30),
             ControlsWidget(
               defendingBodyPart: _defendingBodyPart,
               selectDefendingBodyPart: _selectDefendingBodyPart,
@@ -321,16 +317,10 @@ class FightersInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: ColoredBox(
-                  color: Colors.white,
-                  child: SizedBox(),
-                ),
+                child: ColoredBox(color: Colors.white),
               ),
               Expanded(
-                child: ColoredBox(
-                  color: FightClubColors.backgroundBlock,
-                  child: SizedBox(),
-                ),
+                child: ColoredBox(color: FightClubColors.backgroundBlock),
               ),
             ],
           ),
