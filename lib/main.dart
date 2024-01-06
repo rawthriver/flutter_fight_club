@@ -308,21 +308,18 @@ class FightersInfo extends StatelessWidget {
       child: Stack(
         children: [
           const Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
                 child: ColoredBox(
                   color: Colors.white,
-                  child: SizedBox(
-                    height: 160,
-                  ),
+                  child: SizedBox(),
                 ),
               ),
               Expanded(
                 child: ColoredBox(
                   color: FightClubColors.backgroundBlock,
-                  child: SizedBox(
-                    height: 160,
-                  ),
+                  child: SizedBox(),
                 ),
               ),
             ],
