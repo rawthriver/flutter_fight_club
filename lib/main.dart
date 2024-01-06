@@ -67,17 +67,20 @@ class MyHomePageState extends State<MyHomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ColoredBox(
                   color: FightClubColors.backgroundBlock,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
                         _fightingResult,
                         textAlign: TextAlign.center,
                         softWrap: true,
-                        style: const TextStyle(height: 2, fontSize: 10),
+                        style: const TextStyle(
+                          height: 2,
+                          fontSize: 10,
+                          color: FightClubColors.darkGreyText,
+                        ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
