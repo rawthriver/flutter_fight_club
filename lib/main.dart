@@ -47,6 +47,7 @@ class MyHomePageState extends State<MyHomePage> {
 
   bool _readyToFight = false;
   bool _gameOver = true;
+  String _fightingResult = 'Ready to go';
 
 //EdgeInsets.only(left: 16, top: 30, right: 16, bottom: 30),
 
@@ -62,18 +63,23 @@ class MyHomePageState extends State<MyHomePage> {
               myLivesCount: myLives,
               enemyLivesCount: enemyLives,
             ),
-            const Expanded(
+            Expanded(
               child: SizedBox(
                 child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 16, top: 30, right: 16, bottom: 30),
+                  padding: const EdgeInsets.only(
+                      left: 16, top: 30, right: 16, bottom: 30),
                   child: ColoredBox(
                     color: FightClubColors.backgroundBlock,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: Text('Results'),
+                          child: Text(
+                            _fightingResult,
+                            textAlign: TextAlign.center,
+                            softWrap: true,
+                            style: const TextStyle(height: 2, fontSize: 10),
+                          ),
                         ),
                       ],
                     ),
@@ -122,25 +128,47 @@ class MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _calculateFightingResult() {
+    var results = [];
+    if (_attackingBodyPart != _whatEnemyDefends) {
+      results.add('You hit enemy’s ${_attackingBodyPart?.name.toLowerCase()}.');
+      enemyLives--;
+    } else {
+      results.add('Your attack was blocked.');
+    }
+    if (_defendingBodyPart != _whatEnemyAttacks) {
+      results.add('Enemy hit your ${_defendingBodyPart?.name.toLowerCase()}.');
+      myLives--;
+    } else {
+      results.add('Enemy’s attack was blocked.');
+    }
+    _gameOver = myLives < 1 || enemyLives < 1;
+    if (_gameOver) {
+      _fightingResult =
+          enemyLives < 1 ? (myLives < 1 ? 'Draw' : 'You won') : 'You lost';
+    } else {
+      _fightingResult = results.join('\n');
+    }
+  }
+
   void _startFighting() {
     if (_gameOver) {
       setState(() {
         myLives = maxLives;
         enemyLives = maxLives;
         _gameOver = false;
+        _fightingResult = '';
       });
       return;
     }
     if (!_readyToFight) return;
     setState(() {
-      if (_defendingBodyPart != _whatEnemyAttacks) myLives--;
-      if (_attackingBodyPart != _whatEnemyDefends) enemyLives--;
+      _calculateFightingResult();
       _whatEnemyDefends = BodyPart.random();
       _whatEnemyAttacks = BodyPart.random();
       _defendingBodyPart = null;
       _attackingBodyPart = null;
       _setReadyState();
-      _gameOver = myLives < 1 || enemyLives < 1;
     });
   }
 }
