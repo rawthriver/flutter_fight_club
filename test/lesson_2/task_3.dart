@@ -17,12 +17,15 @@ import 'package:flutter_test/flutter_test.dart';
 
 void runTestLesson2Task3() {
   testWidgets('module3', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(FightClub());
     final List<Row> rowWidgets = tester
-        .widgetList<Row>(find.descendant(of: find.byType(FightersInfo), matching: find.byType(Row)))
+        .widgetList<Row>(find.descendant(
+            of: find.byType(FightersInfo), matching: find.byType(Row)))
         .toList();
-    final Row? rowWithTwoChildren = rowWidgets.firstWhereOrNull((e) => e.children.length == 2);
-    expect(rowWithTwoChildren, isNotNull, reason: "Cannot find Row with needed colors");
+    final Row? rowWithTwoChildren =
+        rowWidgets.firstWhereOrNull((e) => e.children.length == 2);
+    expect(rowWithTwoChildren, isNotNull,
+        reason: "Cannot find Row with needed colors");
     expect(rowWithTwoChildren!.crossAxisAlignment, CrossAxisAlignment.stretch);
     expect(
       rowWithTwoChildren.children[0],

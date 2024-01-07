@@ -33,13 +33,13 @@ void runTestLesson2Task4() {
       expect(coloredBox.color, const Color(0xFFC5D1EA));
     }
 
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(FightClub());
     final SafeArea safeArea = tester.widget<SafeArea>(find.byType(SafeArea));
     expect(safeArea.child, isInstanceOf<Column>());
 
     final Column topLevelColumn = safeArea.child as Column;
-    final Widget? possiblyExpanded =
-        topLevelColumn.children.firstWhereOrNull((element) => element is Expanded);
+    final Widget? possiblyExpanded = topLevelColumn.children
+        .firstWhereOrNull((element) => element is Expanded);
     expect(possiblyExpanded, isNotNull);
     expect(possiblyExpanded, isInstanceOf<Expanded>());
     final Expanded expanded = possiblyExpanded as Expanded;

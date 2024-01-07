@@ -28,21 +28,22 @@ void runTestLesson2Task5() {
 
     final yourData = await rootBundle.load(youAvatarPath);
     final yourBuffer = yourData.buffer;
-    final yourBytes = yourBuffer.asUint8List(yourData.offsetInBytes, yourData.lengthInBytes);
+    final yourBytes =
+        yourBuffer.asUint8List(yourData.offsetInBytes, yourData.lengthInBytes);
     final yourMd5checksum = md5.convert(yourBytes);
     expect(yourMd5checksum.toString(), "b740ac516bd8fb9950654185ce9241c4");
 
     final enemiesData = await rootBundle.load(enemyAvatarPath);
     final enemiesBuffer = enemiesData.buffer;
-    final enemiesBytes =
-        enemiesBuffer.asUint8List(enemiesData.offsetInBytes, enemiesData.lengthInBytes);
+    final enemiesBytes = enemiesBuffer.asUint8List(
+        enemiesData.offsetInBytes, enemiesData.lengthInBytes);
     final enemiesMd5checksum = md5.convert(enemiesBytes);
     expect(enemiesMd5checksum.toString(), "98855f71fa4fd927e3789adebcddaf73");
 
     expect(FightClubImages.youAvatar, youAvatarPath);
     expect(FightClubImages.enemyAvatar, enemyAvatarPath);
 
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(FightClub());
 
     final youImageFinder = assetImageByPathFinder(youAvatarPath);
     expect(youImageFinder, findsOneWidget);

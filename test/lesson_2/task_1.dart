@@ -18,7 +18,7 @@ import '../shared/helpers.dart';
 
 void runTestLesson2Task1() {
   testWidgets('module1', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(FightClub());
 
     final Iterable<Text> allTextsWithGrey = [
       ...tester.widgetList(find.text("DEFEND")),
