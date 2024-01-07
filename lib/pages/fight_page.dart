@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_fight_club/fight_club_colors.dart';
-import 'package:flutter_fight_club/fight_club_icons.dart';
-import 'package:flutter_fight_club/fight_club_images.dart';
-import 'package:flutter_fight_club/go_button.dart';
+import 'package:flutter_fight_club/resources/fight_club_colors.dart';
+import 'package:flutter_fight_club/resources/fight_club_icons.dart';
+import 'package:flutter_fight_club/resources/fight_club_images.dart';
+import 'package:flutter_fight_club/widgets/action_button.dart';
 
 class FightPage extends StatefulWidget {
   const FightPage({super.key});
@@ -73,7 +73,7 @@ class FightPageState extends State<FightPage> {
               selectAttackingBodyPart: _selectAttackingBodyPart,
             ),
             const SizedBox(height: 14),
-            GoButton(
+            ActionButton(
               text: _gameOver ? 'Start new game' : 'Go',
               color: _readyToFight || _gameOver
                   ? FightClubColors.blackButton
