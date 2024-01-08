@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_fight_club/fight_result.dart';
 import 'package:flutter_fight_club/resources/fight_club_colors.dart';
 import 'package:flutter_fight_club/resources/fight_club_icons.dart';
 import 'package:flutter_fight_club/resources/fight_club_images.dart';
 import 'package:flutter_fight_club/widgets/action_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FightPage extends StatefulWidget {
   const FightPage({super.key});
@@ -26,8 +28,8 @@ class FightPageState extends State<FightPage> {
   BodyPart _whatEnemyAttacks = BodyPart.random();
 
   bool _readyToFight = false;
-  bool _gameOver = true;
-  String _fightingResult = 'Ready to go';
+  FightResult? _fightResult;
+  String _fightResultString = 'Ready to fight!';
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class FightPageState extends State<FightPage> {
                     width: double.infinity,
                     child: Center(
                       child: Text(
-                        _fightingResult,
+                        _fightResultString,
                         textAlign: TextAlign.center,
                         softWrap: true,
                         style: const TextStyle(
@@ -74,11 +76,11 @@ class FightPageState extends State<FightPage> {
             ),
             const SizedBox(height: 14),
             ActionButton(
-              text: _gameOver ? 'Start new game' : 'Go',
-              color: _readyToFight || _gameOver
+              text: _fightResult != null ? 'Back' : 'Go',
+              color: _readyToFight || _fightResult != null
                   ? FightClubColors.blackButton
                   : FightClubColors.greyButton,
-              action: _startFighting,
+              action: _startFightClicked,
             ),
             const SizedBox(height: 16),
           ],
@@ -87,27 +89,27 @@ class FightPageState extends State<FightPage> {
     );
   }
 
-  void _setReadyState() {
+  void _updateReadyToFightState() {
     _readyToFight = _defendingBodyPart != null && _attackingBodyPart != null;
   }
 
   void _selectDefendingBodyPart(BodyPart value) {
-    if (_gameOver) return;
+    if (_fightResult != null) return;
     setState(() {
       _defendingBodyPart = value;
-      _setReadyState();
+      _updateReadyToFightState();
     });
   }
 
   void _selectAttackingBodyPart(BodyPart value) {
-    if (_gameOver) return;
+    if (_fightResult != null) return;
     setState(() {
       _attackingBodyPart = value;
-      _setReadyState();
+      _updateReadyToFightState();
     });
   }
 
-  void _calculateFightingResult() {
+  String _calculateFightResult() {
     var results = [];
     if (_attackingBodyPart != _whatEnemyDefends) {
       results.add('You hit enemy’s ${_attackingBodyPart?.name.toLowerCase()}.');
@@ -121,34 +123,30 @@ class FightPageState extends State<FightPage> {
     } else {
       results.add('Enemy’s attack was blocked.');
     }
-    _gameOver = myLives < 1 || enemyLives < 1;
-    if (_gameOver) {
-      _fightingResult =
-          enemyLives < 1 ? (myLives < 1 ? 'Draw' : 'You won') : 'You lost';
-    } else {
-      _fightingResult = results.join('\n');
-    }
+    _fightResult = FightResult.calculate(myLives, enemyLives);
+    if (_fightResult == null) return results.join('\n');
+    return enemyLives < 1 ? (myLives < 1 ? 'Draw' : 'You won') : 'You lost';
   }
 
-  void _startFighting() {
-    if (_gameOver) {
-      setState(() {
-        myLives = maxLives;
-        enemyLives = maxLives;
-        _gameOver = false;
-        _fightingResult = '';
-      });
+  void _startFightClicked() {
+    if (_fightResult != null) {
+      _fightResult = null;
+      Navigator.of(context).pop();
       return;
     }
     if (!_readyToFight) return;
     setState(() {
-      _calculateFightingResult();
+      _fightResultString = _calculateFightResult();
       _whatEnemyDefends = BodyPart.random();
       _whatEnemyAttacks = BodyPart.random();
       _defendingBodyPart = null;
       _attackingBodyPart = null;
-      _setReadyState();
+      _updateReadyToFightState();
     });
+    if (_fightResult != null) {
+      SharedPreferences.getInstance().then(
+          (sp) => sp.setString('last_fight_result', _fightResult!.result));
+    }
   }
 }
 
