@@ -14,7 +14,7 @@ class SecondaryActionButton extends StatelessWidget {
       onTap: action,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16),
-        height: 44,
+        height: 40,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           border: Border.all(width: 2, color: FightClubColors.darkGreyText),

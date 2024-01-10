@@ -144,8 +144,12 @@ class FightPageState extends State<FightPage> {
       _updateReadyToFightState();
     });
     if (_fightResult != null) {
-      SharedPreferences.getInstance().then(
-          (sp) => sp.setString('last_fight_result', _fightResult!.result));
+      SharedPreferences.getInstance().then((sp) {
+        sp.setString('last_fight_result', _fightResult!.result);
+        var statKey = 'stats_${_fightResult!.result}';
+        int currentValue = sp.getInt(statKey) ?? 0;
+        sp.setInt(statKey, ++currentValue);
+      });
     }
   }
 }

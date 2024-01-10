@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fight_club/fight_result.dart';
 import 'package:flutter_fight_club/pages/main_page.dart';
 import 'package:flutter_fight_club/resources/fight_club_colors.dart';
 import 'package:flutter_fight_club/widgets/secondary_action_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StatisticsPage extends StatelessWidget {
   const StatisticsPage({super.key});
@@ -34,24 +36,46 @@ class _StatisticsPageContent extends StatelessWidget {
               ),
             ),
             const Expanded(child: SizedBox()),
-            FutureBuilder<String?>(
-                future: Future.value('stats'),
+            FutureBuilder<List<int>>(
+                future: SharedPreferences.getInstance().then(
+                  (sp) => [
+                    sp.getInt('stats_${FightResult.won.result}') ?? 0,
+                    sp.getInt('stats_${FightResult.draw.result}') ?? 0,
+                    sp.getInt('stats_${FightResult.lost.result}') ?? 0,
+                  ],
+                ),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData || snapshot.data == null) {
                     return const SizedBox();
                   }
-                  return Center(
-                    child: Text(snapshot.data!),
-                  );
+                  return Column(children: [
+                    Text(
+                      'Won: ${snapshot.data![0]}',
+                      style: const TextStyle(fontSize: 16, height: 2.5),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: Text(
+                        'Draw: ${snapshot.data![1]}',
+                        style: const TextStyle(fontSize: 16, height: 2.5),
+                      ),
+                    ),
+                    Text(
+                      'Lost: ${snapshot.data![2]}',
+                      style: const TextStyle(fontSize: 16, height: 2.5),
+                    ),
+                  ]);
                 }),
             const Expanded(child: SizedBox()),
-            SecondaryActionButton(
-              text: 'Back',
-              action: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const MainPage()),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: SecondaryActionButton(
+                text: 'Back',
+                action: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const MainPage()),
+                ),
               ),
             ),
-            const SizedBox(height: 16),
           ],
         ),
       ),
