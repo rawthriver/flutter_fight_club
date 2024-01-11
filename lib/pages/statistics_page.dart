@@ -24,10 +24,10 @@ class _StatisticsPageContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
+              alignment: Alignment.center,
               padding: const EdgeInsets.only(top: 24, left: 16, right: 16),
               child: const Text(
                 'Statistics',
-                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
                   height: 1.6,

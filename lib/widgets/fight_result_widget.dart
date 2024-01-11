@@ -71,7 +71,6 @@ class FightResultWidget extends StatelessWidget {
                 ),
                 child: Text(
                   result.result,
-                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: FightClubColors.whiteText,
                     fontSize: 16,
