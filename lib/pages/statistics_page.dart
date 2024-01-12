@@ -25,7 +25,7 @@ class _StatisticsPageContent extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 24, left: 16, right: 16),
+              margin: const EdgeInsets.only(top: 24, left: 16, right: 16),
               child: const Text(
                 'Statistics',
                 style: TextStyle(
@@ -71,9 +71,7 @@ class _StatisticsPageContent extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16),
               child: SecondaryActionButton(
                 text: 'Back',
-                action: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const MainPage()),
-                ),
+                action: () => Navigator.of(context).pop(),
               ),
             ),
           ],

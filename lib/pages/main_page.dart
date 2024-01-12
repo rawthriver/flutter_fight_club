@@ -47,8 +47,15 @@ class _MainPageContent extends StatelessWidget {
                   return const SizedBox();
                 }
                 return Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Last fight result'),
+                    const Text(
+                      'Last fight result',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: FightClubColors.darkGreyText,
+                      ),
+                    ),
                     const SizedBox(height: 12),
                     FightResultWidget(
                       result: FightResult.fromString(snapshot.data!),

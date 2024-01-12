@@ -5,8 +5,11 @@ class SecondaryActionButton extends StatelessWidget {
   final String text;
   final VoidCallback action;
 
-  const SecondaryActionButton(
-      {super.key, required this.text, required this.action});
+  const SecondaryActionButton({
+    super.key,
+    required this.text,
+    required this.action,
+  });
 
   @override
   Widget build(BuildContext context) {

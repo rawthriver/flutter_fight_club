@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fight_club/fight_result.dart';
+import 'package:flutter_fight_club/pages/main_page.dart';
 import 'package:flutter_fight_club/resources/fight_club_colors.dart';
 import 'package:flutter_fight_club/resources/fight_club_icons.dart';
 import 'package:flutter_fight_club/resources/fight_club_images.dart';
@@ -131,7 +132,8 @@ class FightPageState extends State<FightPage> {
   void _startFightClicked() {
     if (_fightResult != null) {
       _fightResult = null;
-      Navigator.of(context).pop();
+      Navigator.of(context)
+          .pop(); //to update state have to use .push(MaterialPageRoute(builder: (context) => const MainPage()));
       return;
     }
     if (!_readyToFight) return;

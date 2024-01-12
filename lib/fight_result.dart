@@ -7,9 +7,9 @@ class FightResult {
   static const lost = FightResult._('lost');
   static const draw = FightResult._('draw');
 
-  static final List<FightResult> _values = [won, lost, draw];
+  static const List<FightResult> _values = [won, lost, draw];
 
-  static FightResult fromString(String result) {
+  static FightResult fromString(final String result) {
     return _values.firstWhere((e) => e.result == result);
   }
 
